@@ -20,7 +20,15 @@
     "channel": "#notifications-room, optional defaults to slack defined",
     "message_prefix": "optional prefix - can be used for mentions",
     "surround": "optional - can be used for bold(*), italics(_), code(`) and preformatted(```)",
-    "bot_name": "optional bot name, defaults to slack defined"
+    "bot_name": "optional bot name, defaults to slack defined",
+    "template": "/some/path/to/template.erb",
+    "fields": [
+      "list",
+      "of",
+      "optional",
+      "clientkeys",
+      "to_render"
+    ]
   }
 }
 ```
