@@ -115,9 +115,9 @@ class Slack < Sensu::Handler
         # -vjanelle
         is_short = true unless @event['client'][field].length > 50
         client_fields << {
-          :title => field,
-          :value => @event['client'][field],
-          :short => is_short
+          title: field,
+          value: @event['client'][field],
+          short: is_short
         }
       end
     end
