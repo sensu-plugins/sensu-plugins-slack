@@ -71,14 +71,14 @@ class Slack < Sensu::Handler
     if message_template && File.readable?(message_template)
       template = File.read(message_template)
     else
-      template = """<%=
+      template = '''<%=
       [
-        @event['check']['output'],
-        @event['client']['address'],
-        @event['client']['subscriptions'].join(',')
-      ].join(' : ')
+        @event["check"]["output"],
+        @event["client"]["address"],
+        @event["client"]["subscriptions"].join(",")
+      ].join(" : ")
       %>
-      """
+      '''
     end
     eruby = Erubis::Eruby.new(template)
     eruby.result(binding)
