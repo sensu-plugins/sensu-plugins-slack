@@ -13,6 +13,7 @@
 
 require 'sensu-handler'
 require 'json'
+require 'erubis'
 
 class Slack < Sensu::Handler
   option :json_config,
@@ -26,7 +27,11 @@ class Slack < Sensu::Handler
   end
 
   def slack_channel
-    get_setting('channel')
+    if @event['check']['slack_channel']
+      @event['check']['slack_channel']
+    else
+      get_setting('channel')
+    end
   end
 
   def slack_message_prefix
@@ -39,6 +44,14 @@ class Slack < Sensu::Handler
 
   def slack_surround
     get_setting('surround')
+  end
+
+  def message_template
+    get_setting('template')
+  end
+
+  def fields
+    get_setting('fields')
   end
 
   def incident_key
@@ -55,11 +68,20 @@ class Slack < Sensu::Handler
   end
 
   def build_description
-    [
-      @event['check']['output'],
-      @event['client']['address'],
-      @event['client']['subscriptions'].join(',')
-    ].join(' : ')
+    if message_template && File.readable?(message_template)
+      template = File.read(message_template)
+    else
+      template = '''<%=
+      [
+        @event["check"]["output"],
+        @event["client"]["address"],
+        @event["client"]["subscriptions"].join(",")
+      ].join(" : ")
+      %>
+      '''
+    end
+    eruby = Erubis::Eruby.new(template)
+    eruby.result(binding)
   end
 
   def post_data(notice)
@@ -85,11 +107,28 @@ class Slack < Sensu::Handler
   end
 
   def payload(notice)
+    client_fields = []
+
+    unless fields.nil?
+      fields.each do |field|
+        # arbritary based on what I feel like
+        # -vjanelle
+        is_short = true unless @event['client'][field].length > 50
+        client_fields << {
+          title: field,
+          value: @event['client'][field],
+          short: is_short
+        }
+      end
+    end
+
     {
       icon_url: 'http://sensuapp.org/img/sensu_logo_large-c92d73db.png',
       attachments: [{
+        title: "#{@event['client']['address']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
-        color: color
+        color: color,
+        fields: client_fields
       }]
     }.tap do |payload|
       payload[:channel] = slack_channel if slack_channel
@@ -109,5 +148,15 @@ class Slack < Sensu::Handler
 
   def check_status
     @event['check']['status']
+  end
+
+  def translate_status
+    status = {
+      0 => :OK,
+      1 => :WARNING,
+      2 => :CRITICAL,
+      3 => :UNKNOWN
+    }
+    status[check_status.to_i]
   end
 end
