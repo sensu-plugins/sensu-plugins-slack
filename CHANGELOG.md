@@ -5,8 +5,11 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## Unreleased][unreleased]
 
-## [0.0.2] - 2015-06-03
+## [0.0.3] - 2015-06-03
+### Added
+-additional functionality to slack hander to improve generated output
 
+## [0.0.2] - 2015-06-03
 ### Fixed
 - added binstubs
 
@@ -14,6 +17,5 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - removed cruft from /lib
 
 ## 0.0.1 - 2015-05-29
-
 ### Added
 - initial release
