@@ -4,7 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## Unreleased][unreleased]
+
+### Changed
+- put gemspec deps in alpha order
+- remove cruft from sensu-plugins-slack.rb
 - Remove JSON gem dep that is not longer needed with Ruby 1.9+
+- Put Rakfile deps in alpha order
+- update documentation links in the README and CONTRIBUTING
+- remove the Vagrantfile
 
 ## [0.0.3] - 2015-06-03
 ### Added
