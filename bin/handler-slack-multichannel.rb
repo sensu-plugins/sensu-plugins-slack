@@ -22,7 +22,7 @@
 #         "default": [ "#no-team-alerts" ],
 #         "compulsory": [ "#all-alerts" ],
 #        }
-#     } 
+#     }
 # }
 #
 # Alerts are always sent to the compulsory channel(s).
@@ -32,7 +32,7 @@
 #
 # Check specific channels:
 #
-# { "checks": 
+# { "checks":
 #     "check_my_db": {
 #       "handlers": [ "default", "slack" ],
 #       "slack" {
@@ -112,7 +112,7 @@ class Slack < Sensu::Handler
     end
 
     if compulsory_channels
-      channels = channels | compulsory_channels
+      channels |= compulsory_channels
       puts "adding compulsory channels: #{compulsory_channels.join(',').chomp(',')}"
     end
 
@@ -143,7 +143,7 @@ class Slack < Sensu::Handler
 
   def handle
     unless slack_channels.is_a?(Array)
-      puts "no channels found"
+      puts 'no channels found'
       return
     end
 
