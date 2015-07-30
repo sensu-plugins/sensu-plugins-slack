@@ -77,27 +77,21 @@ class Slack < Sensu::Handler
   end
 
   def default_channels
-    begin
-      return get_setting('channels')['default']
-    rescue
-      return []
-    end
+    return get_setting('channels')['default']
+  rescue
+    return []
   end
 
   def compulsory_channels
-    begin
-      return get_setting('channels')['compulsory']
-    rescue
-      return false
-    end
+    return get_setting('channels')['compulsory']
+  rescue
+    return false
   end
 
   def check_configured_channels
-    begin
-      return @event['check']['slack']['channels']
-    rescue
-      return false
-    end
+    return @event['check']['slack']['channels']
+  rescue
+    return false
   end
 
   def compile_channel_list
@@ -143,7 +137,7 @@ class Slack < Sensu::Handler
 
   def handle
     unless slack_channels.is_a?(Array)
-      puts 'no channels found'
+      puts 'nno channels found'
       return
     end
 
