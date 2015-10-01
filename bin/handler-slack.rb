@@ -27,11 +27,7 @@ class Slack < Sensu::Handler
   end
 
   def slack_channel
-    if @event['check']['slack_channel']
-      @event['check']['slack_channel']
-    else
-      get_setting('channel')
-    end
+    @event['client']['slack_channel'] || @event['check']['slack_channel'] || get_setting('channel')
   end
 
   def slack_message_prefix
