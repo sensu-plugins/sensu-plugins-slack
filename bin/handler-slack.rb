@@ -109,7 +109,7 @@ class Slack < Sensu::Handler
       fields.each do |field|
         # arbritary based on what I feel like
         # -vjanelle
-        is_short = true unless @event['client'][field].length > 50
+        is_short = true unless @event['client'].key?(field) && @event['client'][field].length > 50
         client_fields << {
           title: field,
           value: @event['client'][field],
