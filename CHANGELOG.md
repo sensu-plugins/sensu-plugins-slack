@@ -25,7 +25,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [0.0.3] - 2015-06-03
 ### Added
--   additional functionality to slack hander to improve generated output
+- additional functionality to slack hander to improve generated output
 
 ## [0.0.2] - 2015-06-03
 ### Fixed
