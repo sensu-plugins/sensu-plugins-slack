@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## Unreleased
+
+## [0.1.0] - 2015-11-12
 ### Added
 - New handler-slack-multichannel.rb handler for more complex multi-channel alerting to Slack
 - Allow the client to set the channel
