@@ -10,7 +10,8 @@
 ## Functionality
 
 ## Files
- * handler-slack.rb
+ * bin/handler-slack.rb
+ * bin/handler-slack-multichannel.rb
 
 ## Usage
 ```
