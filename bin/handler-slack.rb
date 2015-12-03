@@ -26,6 +26,10 @@ class Slack < Sensu::Handler
     get_setting('webhook_url')
   end
 
+  def slack_icon_url
+    get_setting('icon_url')
+  end
+
   def slack_channel
     @event['client']['slack_channel'] || @event['check']['slack_channel'] || get_setting('channel')
   end
@@ -85,9 +89,10 @@ class Slack < Sensu::Handler
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
-    req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
+    req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", {'Content-Type' =>'application/json'})
     text = slack_surround ? slack_surround + notice + slack_surround : notice
-    req.body = "payload=#{payload(text).to_json}"
+
+    req.body = payload(text).to_json
 
     response = http.request(req)
     verify_response(response)
@@ -119,7 +124,7 @@ class Slack < Sensu::Handler
     end
 
     {
-      icon_url: 'http://sensuapp.org/img/sensu_logo_large-c92d73db.png',
+      icon_url: slack_icon_url ? slack_icon_url : 'http://sensuapp.org/img/sensu_logo_large-c92d73db.png',
       attachments: [{
         title: "#{@event['client']['address']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
