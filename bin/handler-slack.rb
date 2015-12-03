@@ -69,7 +69,7 @@ class Slack < Sensu::Handler
     else
       template = '''<%=
       [
-        @event["check"]["output"],
+        @event["check"]["output"].gsub('"', '\\"'),
         @event["client"]["address"],
         @event["client"]["subscriptions"].join(",")
       ].join(" : ")
