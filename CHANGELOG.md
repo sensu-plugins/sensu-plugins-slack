@@ -8,11 +8,18 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - Slack handler posts JSON content type and format to slack.
 - Slack config supports icon_url and icon_emoji
 ### Added
-- New handler-slack-multichannel.rb handler for more complex multi-channel alerting to Slack
+- add arguments to specify proxy settings
 
-## [0.0.3] - 2015-07-14
+## [0.1.0] - 2015-11-12
+### Added
+- New handler-slack-multichannel.rb handler for more complex multi-channel alerting to Slack
+- Allow the client to set the channel
+
 ### Changed
 - updated sensu-plugin gem to 1.2.0
+
+### Fixed
+- Fixed exception caused by missing field
 
 ## [0.0.4] - 2015-07-13
 ### Changed
@@ -25,7 +32,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [0.0.3] - 2015-06-03
 ### Added
--additional functionality to slack hander to improve generated output
+- additional functionality to slack hander to improve generated output
 
 ## [0.0.2] - 2015-06-03
 ### Fixed
