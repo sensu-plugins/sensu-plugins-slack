@@ -26,6 +26,10 @@ class Slack < Sensu::Handler
     get_setting('webhook_url')
   end
 
+  def slack_icon_emoji
+    get_setting('icon_emoji')
+  end
+
   def slack_icon_url
     get_setting('icon_url')
   end
@@ -154,6 +158,7 @@ class Slack < Sensu::Handler
     }.tap do |payload|
       payload[:channel] = slack_channel if slack_channel
       payload[:username] = slack_bot_name if slack_bot_name
+      payload[:icon_emoji] = slack_icon_emoji if slack_icon_emoji
     end
   end
 
