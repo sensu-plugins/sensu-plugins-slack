@@ -26,6 +26,10 @@ class Slack < Sensu::Handler
     get_setting('webhook_url')
   end
 
+  def slack_icon_emoji
+    get_setting('icon_emoji')
+  end
+
   def slack_icon_url
     get_setting('icon_url')
   end
@@ -89,7 +93,7 @@ class Slack < Sensu::Handler
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
 
-    req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", {'Content-Type' =>'application/json'})
+    req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
     text = slack_surround ? slack_surround + notice + slack_surround : notice
 
     req.body = payload(text).to_json
@@ -134,6 +138,7 @@ class Slack < Sensu::Handler
     }.tap do |payload|
       payload[:channel] = slack_channel if slack_channel
       payload[:username] = slack_bot_name if slack_bot_name
+      payload[:icon_emoji] = slack_icon_emoji if slack_icon_emoji
     end
   end
 

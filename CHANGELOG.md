@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## Unreleased
+### Changed
+- Slack handler posts JSON content type and format to slack.
+- Slack config supports icon_url and icon_emoji
 ### Added
 - New handler-slack-multichannel.rb handler for more complex multi-channel alerting to Slack
 
