@@ -27,8 +27,8 @@
     "proxy_port": "The HTTP proxy port (if there is a proxy)"
     "proxy_username": "The HTTP proxy username (if there is a proxy)"
     "proxy_password": "The HTTP proxy user password (if there is a proxy)"
-    "icon_url" : "http://sensuapp.org/img/sensu_logo_large-c92d73db.png"
-    "icon_emoji" : ":snowman:"
+    "icon_url": "http://sensuapp.org/img/sensu_logo_large-c92d73db.png"
+    "icon_emoji": ":snowman:"
     "fields": [
       "list",
       "of",
