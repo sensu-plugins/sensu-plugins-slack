@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## Unreleased
 
+## [0.1.2] - 2016-01-12
+### Changed
+- Switched the Slack message title to reference the client name instead of the client IP address
+
 ## [0.1.1] - 2015-12-09
 ### Changed
 - Slack handler posts JSON content type and format to slack.
