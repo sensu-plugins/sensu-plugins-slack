@@ -129,9 +129,13 @@ class Slack < Sensu::Handler
     http.use_ssl = true
 
     req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
-    text = slack_surround ? slack_surround + notice + slack_surround : notice
 
-    req.body = payload(text).to_json
+    if payload_template.nil?
+      text = slack_surround ? slack_surround + notice + slack_surround : notice
+      req.body = payload(text).to_json
+    else
+      req.body = notice
+    end
 
     response = http.request(req)
     verify_response(response)
