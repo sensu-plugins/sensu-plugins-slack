@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## Unreleased
 
+## [0.1.2] - 2016-02-05
+### Added
+- new certs
+
 ## [0.1.1] - 2015-12-09
 ### Changed
 - Slack handler posts JSON content type and format to slack.
@@ -46,3 +50,11 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## 0.0.1 - 2015-05-29
 ### Added
 - initial release
+
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.1.2...HEAD
+[0.1.2]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.1.1...0.1.2
+[0.1.1]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.1.0...0.1.1
+[0.1.0]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.0.4...0.1.0
+[0.0.4]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.0.3...0.0.4
+[0.0.3]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.0.2...0.0.3
+[0.0.2]: https://github.com/sensu-plugins/sensu-plugins-ssl/compare/0.0.1...0.0.2
