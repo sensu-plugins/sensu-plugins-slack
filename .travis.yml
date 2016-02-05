@@ -1,19 +1,36 @@
 language: ruby
 cache:
-  - bundler
+- bundler
+before_install:
+- openssl aes-256-cbc -K $encrypted_d1d31e51f475_key -iv $encrypted_d1d31e51f475_iv
+  -in pvt_key -out certs/gem-private_key.pem -d
 install:
-  - bundle install
+- bundle install
 rvm:
-  - 1.9.3
-  - 2.0
-  - 2.1
-  - 2.2
+- 1.9.3
+- 2.0
+- 2.1
+- 2.2
 notifications:
   email:
     recipients:
-      - sensu-plugin@sensu-plugins.io
+    - sensu-plugin@sensu-plugins.io
     on_success: change
     on_failure: always
-
 script:
-  - 'bundle exec rake default'
+- bundle exec rake default
+- gem build sensu-plugins-slack.gemspec
+- gem install sensu-plugins-slack-*.gem
+deploy:
+  provider: rubygems
+  api_key:
+    secure: YGx1ZNlHwWA7B29ZpUKvgPG3RIPvEun/n3ZcSJMyXd1inN2533ByEaTb3MzHe/JqSWKzJcxRUoYd6DW4aj8SeSF68dG88QN4j0FisXWJrO+df6DwbbyZLXMSCTWrNrqKYVk1lg1/GkGbQfMvrJbptJ/VELmYjsZMRgBLPcukM6I=
+  gem: sensu-plugins-slack
+  on:
+    tags: true
+    repo: sensu-plugins/sensu-plugins-slack
+    all_branches: true
+    rvm: 1.9.3
+    rvm: 2.0
+    rvm: 2.1
+    rvm: 2.2

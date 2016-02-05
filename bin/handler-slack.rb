@@ -127,7 +127,7 @@ class Slack < Sensu::Handler
     when Net::HTTPSuccess
       true
     else
-      fail response.error!
+      raise response.error!
     end
   end
 

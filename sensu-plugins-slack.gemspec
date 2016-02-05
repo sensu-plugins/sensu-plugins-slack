@@ -9,7 +9,7 @@ else
   require_relative 'lib/sensu-plugins-slack'
 end
 
-pvt_key = '~/.ssh/gem-private_key.pem'
+pvt_key = 'certs/gem-private_key.pem'
 
 Gem::Specification.new do |s|
   s.authors                = ['Sensu-Plugins and contributors']
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.files                  = Dir.glob('{bin,lib}/**/*') + %w(LICENSE README.md CHANGELOG.md)
   s.homepage               = 'https://github.com/sensu-plugins/sensu-plugins-slack'
   s.license                = 'MIT'
-  s.metadata               = { 'maintainer'         => '@sensu-plugin',
+  s.metadata               = { 'maintainer'         => 'sensu-plugin',
                                'development_status' => 'active',
                                'production_status'  => 'unstable - testing recommended',
                                'release_draft'      => 'false',
@@ -32,13 +32,13 @@ Gem::Specification.new do |s|
   s.post_install_message   = 'You can use the embedded Ruby by setting EMBEDDED_RUBY=true in /etc/default/sensu'
   s.require_paths          = ['lib']
   s.required_ruby_version  = '>= 1.9.3'
-  s.signing_key            = File.expand_path(pvt_key) if $PROGRAM_NAME =~ /gem\z/
+  s.signing_key            = File.expand_path(pvt_key) if $PROGRAM_NAME.end_with?('gem')
   s.summary                = 'Sensu plugins for interfacing with Slack chat'
   s.test_files             = s.files.grep(%r{^(test|spec|features)/})
   s.version                = SensuPluginsSlack::Version::VER_STRING
 
   s.add_runtime_dependency 'erubis',         '2.7.0'
-  s.add_runtime_dependency 'sensu-plugin',   '1.2.0'
+  s.add_runtime_dependency 'sensu-plugin',   '~> 1.2'
 
   s.add_development_dependency 'bundler',                   '~> 1.7'
   s.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry',                       '~> 0.10'
   s.add_development_dependency 'rake',                      '~> 10.0'
   s.add_development_dependency 'redcarpet',                 '~> 3.2'
-  s.add_development_dependency 'rubocop',                   '0.32.1'
+  s.add_development_dependency 'rubocop',                   '0.37.0'
   s.add_development_dependency 'rspec',                     '~> 3.1'
   s.add_development_dependency 'yard',                      '~> 0.8'
 end

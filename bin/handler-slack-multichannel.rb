@@ -152,11 +152,11 @@ class Slack < Sensu::Handler
   def post_data(notice, channel)
     uri = URI(slack_webhook_url)
 
-    if (defined?(slack_proxy_addr)).nil?
-      http = Net::HTTP.new(uri.host, uri.port)
-    else
-      http = Net::HTTP::Proxy(slack_proxy_addr, slack_proxy_port).new(uri.host, uri.port)
-    end
+    http = if defined?(slack_proxy_addr).nil?
+             Net::HTTP.new(uri.host, uri.port)
+           else
+             Net::HTTP::Proxy(slack_proxy_addr, slack_proxy_port).new(uri.host, uri.port)
+           end
 
     http.use_ssl = true
 
@@ -182,7 +182,7 @@ class Slack < Sensu::Handler
     when Net::HTTPSuccess
       true
     else
-      fail response.error!
+      raise response.error!
     end
   end
 

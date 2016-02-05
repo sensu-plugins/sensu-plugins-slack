@@ -28,3 +28,6 @@ RegexpLiteral:
 
 Style/Documentation:
   Enabled: false
+
+Lint/ImplicitStringConcatenation:
+  Enabled: false
