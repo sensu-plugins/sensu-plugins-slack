@@ -119,7 +119,7 @@ class Slack < Sensu::Handler
     eruby.result(binding)
   end
 
-  def post_data(notice)
+  def post_data(body)
     uri = URI(slack_webhook_url)
     http = if proxy_address.nil?
              Net::HTTP.new(uri.host, uri.port)
@@ -131,10 +131,10 @@ class Slack < Sensu::Handler
     req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
 
     if payload_template.nil?
-      text = slack_surround ? slack_surround + notice + slack_surround : notice
+      text = slack_surround ? slack_surround + body + slack_surround : body
       req.body = payload(text).to_json
     else
-      req.body = notice
+      req.body = body
     end
 
     response = http.request(req)
