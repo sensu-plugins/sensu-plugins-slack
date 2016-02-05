@@ -55,7 +55,7 @@ class Slack < Sensu::Handler
   end
 
   def message_template
-    get_setting('template')
+    get_setting('template') || get_setting('message_template')
   end
 
   def fields
