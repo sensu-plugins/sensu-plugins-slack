@@ -22,6 +22,10 @@ class Slack < Sensu::Handler
          long: '--json JSONCONFIG',
          default: 'slack'
 
+  def payload_template
+    get_setting('payload_template')
+  end
+
   def slack_webhook_url
     get_setting('webhook_url')
   end
@@ -83,8 +87,19 @@ class Slack < Sensu::Handler
   end
 
   def handle
-    description = @event['notification'] || build_description
-    post_data("#{incident_key}: #{description}")
+    if payload_template.nil?
+      description = @event['notification'] || build_description
+      post_data("#{incident_key}: #{description}")
+    else
+      post_data(render_payload_template)
+    end
+  end
+
+  def render_payload_template
+    return unless payload_template && File.readable?(payload_template)
+    template = File.read(payload_template)
+    eruby = Erubis::Eruby.new(template)
+    eruby.result(binding)
   end
 
   def build_description

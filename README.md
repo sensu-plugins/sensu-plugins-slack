@@ -22,6 +22,8 @@
     "surround": "optional - can be used for bold(*), italics(_), code(`) and preformatted(```)",
     "bot_name": "optional bot name, defaults to slack defined",
     "template": "/some/path/to/template.erb",
+    "template": "/some/path/to/template.erb",
+    "payload_template": "/some/path/to/template.erb",
     "proxy_address": "The HTTP proxy address (example: proxy.example.com)",
     "proxy_port": "The HTTP proxy port (if there is a proxy)",
     "proxy_username": "The HTTP proxy username (if there is a proxy)",
