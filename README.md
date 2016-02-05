@@ -64,4 +64,14 @@
 }
 ```
 
+You can also use `to_json`
+
+```
+<%=
+  {
+    :text => "Some text"
+  }.to_json
+-%>
+```
+
 See https://api.slack.com/incoming-webhooks and https://api.slack.com/docs/attachments
