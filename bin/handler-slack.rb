@@ -22,6 +22,10 @@ class Slack < Sensu::Handler
          long: '--json JSONCONFIG',
          default: 'slack'
 
+  def payload_template
+    get_setting('payload_template')
+  end
+
   def slack_webhook_url
     get_setting('webhook_url')
   end
@@ -51,7 +55,7 @@ class Slack < Sensu::Handler
   end
 
   def message_template
-    get_setting('template')
+    get_setting('template') || get_setting('message_template')
   end
 
   def fields
@@ -83,8 +87,19 @@ class Slack < Sensu::Handler
   end
 
   def handle
-    description = @event['notification'] || build_description
-    post_data("#{incident_key}: #{description}")
+    if payload_template.nil?
+      description = @event['notification'] || build_description
+      post_data("#{incident_key}: #{description}")
+    else
+      post_data(render_payload_template)
+    end
+  end
+
+  def render_payload_template
+    return unless payload_template && File.readable?(payload_template)
+    template = File.read(payload_template)
+    eruby = Erubis::Eruby.new(template)
+    eruby.result(binding)
   end
 
   def build_description
@@ -104,7 +119,7 @@ class Slack < Sensu::Handler
     eruby.result(binding)
   end
 
-  def post_data(notice)
+  def post_data(body)
     uri = URI(slack_webhook_url)
     http = if proxy_address.nil?
              Net::HTTP.new(uri.host, uri.port)
@@ -114,9 +129,13 @@ class Slack < Sensu::Handler
     http.use_ssl = true
 
     req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
-    text = slack_surround ? slack_surround + notice + slack_surround : notice
 
-    req.body = payload(text).to_json
+    if payload_template.nil?
+      text = slack_surround ? slack_surround + body + slack_surround : body
+      req.body = payload(text).to_json
+    else
+      req.body = body
+    end
 
     response = http.request(req)
     verify_response(response)

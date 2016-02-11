@@ -8,6 +8,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## [0.1.2] - 2016-02-05
 ### Added
 - new certs
+- Added a payload_template to allow for a customized JSON payload
 
 ## [0.1.1] - 2015-12-09
 ### Changed
