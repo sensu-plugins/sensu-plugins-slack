@@ -21,10 +21,10 @@ script:
 deploy:
   provider: rubygems
   api_key:
-    secure: EqJH4o+MAFbzkZQB76PESuK54p2M8iyHe7aQ1iPhKdCm2oPTpU6j2ymbGl38ccmHt6vXpmVzF6CIi4V7EHNK+n+Id+5oAcJpZTt/HxratlKM48le3ycYBt7cPlZjslFNRe/Zp+dsFYqwqk4WYSCJhIekaDfQcM1Snee7Auhc1UI=
+    secure: Luv34w7vY7lhRb9+dEY62dPt99UDJ6kQRKuMP3sXXWG4ZBhkPAGAw0BUJwA5Ia3iLum+9dRm5cpARiJOn0AIATjGkliuQGWkW6Hp1M8/Eh81TorMqeDkS4LTCPBQMySNeCqAXMLeek7gGXpLa+3kF3hd2cSr2jb7jmzCN4NLm1s=
   gem: sensu-plugins-slack
   on:
-    tags: true
+    ags: true
     all_branches: true
     rvm: 1.9.3
     rvm: 2.0
