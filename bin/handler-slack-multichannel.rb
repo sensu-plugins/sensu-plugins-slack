@@ -154,7 +154,7 @@ class Slack < Sensu::Handler
 
     slack_channels.each do |channel|
       if payload_template.nil?
-        description = @event['notification'] || build_description
+        notice = @event['notification'] || build_description
         post_data(notice, channel)
       else
         post_data(render_payload_template, channel)
@@ -263,5 +263,4 @@ class Slack < Sensu::Handler
     }
     status[check_status.to_i]
   end
-
 end
