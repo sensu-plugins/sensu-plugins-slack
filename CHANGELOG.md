@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Fixed
+- Extended the payload_template to work with multi-channel handlers
 
 ## [0.1.2] - 2016-02-05
 ### Added
