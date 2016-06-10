@@ -44,6 +44,7 @@
 
 require 'sensu-handler'
 require 'json'
+require 'erubis'
 
 class Slack < Sensu::Handler
   option :json_config,
@@ -51,6 +52,14 @@ class Slack < Sensu::Handler
          short: '-j JSONCONFIG',
          long: '--json JSONCONFIG',
          default: 'slack'
+
+  def payload_template
+    get_setting('payload_template')
+  end
+
+  def message_template
+    get_setting('template') || get_setting('message_template')
+  end
 
   def slack_webhook_url
     get_setting('webhook_url')
@@ -137,16 +146,44 @@ class Slack < Sensu::Handler
 
   def handle
     unless slack_channels.is_a?(Array)
-      puts 'nno channels found'
+      puts 'no channels found'
       return
     end
 
     notice = build_notice
 
     slack_channels.each do |channel|
-      puts "#{channel}: #{notice}"
-      post_data(notice, channel)
+      if payload_template.nil?
+        notice = @event['notification'] || build_description
+        post_data(notice, channel)
+      else
+        post_data(render_payload_template, channel)
+      end
     end
+  end
+
+  def render_payload_template
+    return unless payload_template && File.readable?(payload_template)
+    template = File.read(payload_template)
+    eruby = Erubis::Eruby.new(template)
+    eruby.result(binding)
+  end
+
+  def build_description
+    if message_template && File.readable?(message_template)
+      template = File.read(message_template)
+    else
+      template = '''<%=
+      [
+        @event["check"]["output"].gsub(\'"\', \'\\"\'),
+        @event["client"]["address"],
+        @event["client"]["subscriptions"].join(",")
+      ].join(" : ")
+      %>
+      '''
+    end
+    eruby = Erubis::Eruby.new(template)
+    eruby.result(binding)
   end
 
   def post_data(notice, channel)
@@ -162,9 +199,12 @@ class Slack < Sensu::Handler
 
     begin
       req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
-      text = slack_surround ? slack_surround + notice + slack_surround : notice
-      req.body = payload(text, channel).to_json
-
+      if payload_template.nil?
+        text = slack_surround ? slack_surround + notice + slack_surround : notice
+        req.body = payload(text, channel).to_json
+      else
+        req.body = notice
+      end
       puts "request: #{req}"
 
       response = http.request(req)
@@ -212,5 +252,15 @@ class Slack < Sensu::Handler
 
   def check_status
     @event['check']['status']
+  end
+
+  def translate_status
+    status = {
+      0 => :OK,
+      1 => :WARNING,
+      2 => :CRITICAL,
+      3 => :UNKNOWN
+    }
+    status[check_status.to_i]
   end
 end
