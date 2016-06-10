@@ -3,13 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'date'
 
-if RUBY_VERSION < '2.0.0'
-  require 'sensu-plugins-slack'
-else
-  require_relative 'lib/sensu-plugins-slack'
-end
-
-# pvt_key = 'certs/gem-private_key.pem'
+require_relative 'lib/sensu-plugins-slack'
 
 Gem::Specification.new do |s|
   s.authors                = ['Sensu-Plugins and contributors']
@@ -30,8 +24,7 @@ Gem::Specification.new do |s|
   s.platform               = Gem::Platform::RUBY
   s.post_install_message   = 'You can use the embedded Ruby by setting EMBEDDED_RUBY=true in /etc/default/sensu'
   s.require_paths          = ['lib']
-  s.required_ruby_version  = '>= 1.9.3'
-  # s.signing_key            = File.expand_path(pvt_key) if $PROGRAM_NAME.end_with?('gem')
+  s.required_ruby_version  = '>= 2.0.0'
   s.summary                = 'Sensu plugins for interfacing with Slack chat'
   s.test_files             = s.files.grep(%r{^(test|spec|features)/})
   s.version                = SensuPluginsSlack::Version::VER_STRING

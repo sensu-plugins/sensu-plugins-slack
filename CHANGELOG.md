@@ -7,6 +7,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Fixed
 - Extended the payload_template to work with multi-channel handlers
 
+### Changed
+- Remove Ruby 1.9.3 support; add Ruby 2.3.0 support
+- Update to Rubocop 0.40 and cleanup
+
 ## [0.1.2] - 2016-02-05
 ### Added
 - new certs
