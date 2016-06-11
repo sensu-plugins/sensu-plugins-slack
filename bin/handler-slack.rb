@@ -169,7 +169,7 @@ class Slack < Sensu::Handler
     {
       icon_url: slack_icon_url ? slack_icon_url : 'http://sensuapp.org/img/sensu_logo_large-c92d73db.png',
       attachments: [{
-        title: "#{@event['client']['address']} - #{translate_status}",
+        title: "#{@event['client']['name']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
         color: color,
         fields: client_fields
