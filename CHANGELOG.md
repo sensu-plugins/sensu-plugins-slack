@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.0.0] - 2016-06-14
 ### Added
 - Added a payload_template to allow for a customized JSON payload
 - Ruby 2.3.0 support
@@ -63,7 +65,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/v0.1.2...1.0.0
 [0.1.2]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/0.1.1...v0.1.2
 [0.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/0.0.4...0.1.0
