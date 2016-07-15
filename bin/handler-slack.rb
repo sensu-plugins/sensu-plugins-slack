@@ -88,7 +88,7 @@ class Slack < Sensu::Handler
 
   def handle
     if payload_template.nil?
-      description = @event['notification'] || build_description
+      description = @event['check']['notification'] || build_description
       post_data("#{incident_key}: #{description}")
     else
       post_data(render_payload_template)
