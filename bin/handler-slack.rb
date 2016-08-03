@@ -178,6 +178,7 @@ class Slack < Sensu::Handler
       payload[:channel] = slack_channel if slack_channel
       payload[:username] = slack_bot_name if slack_bot_name
       payload[:icon_emoji] = slack_icon_emoji if slack_icon_emoji
+      payload[:link_names] = 1
     end
   end
 
