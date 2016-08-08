@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
+## [1.0.1] - 2016-08-08
+### Added
+- Added a link_names to allow for a mentions
+
 ## [1.0.0] - 2016-06-14
 ### Added
 - Added a payload_template to allow for a customized JSON payload
