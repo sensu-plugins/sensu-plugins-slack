@@ -21,6 +21,7 @@
     "message_prefix": "optional prefix - can be used for mentions",
     "surround": "optional - can be used for bold(*), italics(_), code(`) and preformatted(```)",
     "bot_name": "optional bot name, defaults to slack defined",
+    "link_names": "optional - find and link channel names and usernames",
     "message_template": "optional description erb template file - /some/path/to/template.erb",
     "payload_template": "optional json payload template file (note: overrides most other template options.)",
     "template": "backwards-compatible alias for message_template",

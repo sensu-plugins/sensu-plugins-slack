@@ -54,6 +54,10 @@ class Slack < Sensu::Handler
     get_setting('surround')
   end
 
+  def slack_link_names
+    get_setting('link_names')
+  end
+
   def message_template
     get_setting('template') || get_setting('message_template')
   end
@@ -178,7 +182,7 @@ class Slack < Sensu::Handler
       payload[:channel] = slack_channel if slack_channel
       payload[:username] = slack_bot_name if slack_bot_name
       payload[:icon_emoji] = slack_icon_emoji if slack_icon_emoji
-      payload[:link_names] = 1
+      payload[:link_names] = slack_link_names if slack_link_names
     end
   end
 
