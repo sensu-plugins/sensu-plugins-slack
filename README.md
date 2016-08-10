@@ -54,6 +54,7 @@
 {
   "username": "sensu alarms",
   "icon_emoji": ":bell:",
+  "channel": channel,
   "attachments": [
     {
       "fallback": "<%= @event["check"]["output"] %>",
