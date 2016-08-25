@@ -5,6 +5,9 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
+### Fixed
+- Allow custom channels with custom payload
+
 ## [1.0.1] - 2016-08-08
 ### Added
 - Added a link_names to allow for a mentions

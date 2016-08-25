@@ -95,11 +95,11 @@ class Slack < Sensu::Handler
       description = @event['check']['notification'] || build_description
       post_data("#{incident_key}: #{description}")
     else
-      post_data(render_payload_template)
+      post_data(render_payload_template(slack_channel))
     end
   end
 
-  def render_payload_template
+  def render_payload_template(channel)
     return unless payload_template && File.readable?(payload_template)
     template = File.read(payload_template)
     eruby = Erubis::Eruby.new(template)
