@@ -5,6 +5,12 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
+### Added
+
+- Added title line to slack-handler-multichannel.rb to mirror functionality of slack-handler.rb
+
+
+## [1.0.2] - 2017-03-13
 ### Fixed
 - Allow custom channels with custom payload
 
