@@ -141,7 +141,15 @@ class Slack < Sensu::Handler
   end
 
   def build_notice
-    "#{@event['check']['status'].to_s.rjust(3)} | #{incident_key}: #{@event['check']['output'].strip}"
+      # Default string to post on Slack
+      notice_message = "#{@event['check']['status'].to_s.rjust(3)} | #{incident_key}: #{@event['check']['output'].strip}"
+
+      # Append a newline with the check's playbook field if defined
+      if @event['check']['playbook']
+        notice_message = "#{@event['check']['status'].to_s.rjust(3)} | #{incident_key}: #{@event['check']['output'].strip}\n\n#{@event['check']['playbook']}"
+      end
+
+      return notice_message
   end
 
   def handle
