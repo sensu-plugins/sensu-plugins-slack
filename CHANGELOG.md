@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.1.0] - 2017-06-22
 ### Added
 - `slack-handler-multichannel.rb`: Add title line to mirror functionality of slack-handler.rb (@zer0nimbus)
 - `handler-slack.rb`: Add a `link_names` parameter to allow for mentions (@unionsep)
@@ -72,7 +74,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/v0.1.2...1.0.0
 [0.1.2]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/0.1.1...v0.1.2
 [0.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/0.1.0...0.1.1
