@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Changed
+- Ran rubocop against `bin/slack-handler.rb` and `bin/slack-handler-multichannel.rb` (@pgporada)
+- Fixed occurrences of http:// needing to be https:// by default (@pgporada)
+- Fixed the location of the Sensu image that gets pulled in (@pgporada)
 
 ## [1.1.0] - 2017-06-22
 ### Added
