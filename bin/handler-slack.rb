@@ -107,18 +107,18 @@ class Slack < Sensu::Handler
   end
 
   def build_description
-    if message_template && File.readable?(message_template)
-      template = File.read(message_template)
-    else
-      template = '''<%=
-      [
-        @event["check"]["output"].gsub(\'"\', \'\\"\'),
-        @event["client"]["address"],
-        @event["client"]["subscriptions"].join(",")
-      ].join(" : ")
-      %>
-      '''
-    end
+    template = if message_template && File.readable?(message_template)
+                 File.read(message_template)
+               else
+                 '''<%=
+                 [
+                   @event["check"]["output"].gsub(\'"\', \'\\"\'),
+                   @event["client"]["address"],
+                   @event["client"]["subscriptions"].join(",")
+                 ].join(" : ")
+                 %>
+                 '''
+               end
     eruby = Erubis::Eruby.new(template)
     eruby.result(binding)
   end
@@ -171,7 +171,7 @@ class Slack < Sensu::Handler
     end
 
     {
-      icon_url: slack_icon_url ? slack_icon_url : 'http://sensuapp.org/img/sensu_logo_large-c92d73db.png',
+      icon_url: slack_icon_url ? slack_icon_url : 'https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png',
       attachments: [{
         title: "#{@event['client']['address']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
