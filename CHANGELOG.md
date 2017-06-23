@@ -1,22 +1,16 @@
-#Change Log
+# Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-
 ### Added
+- `slack-handler-multichannel.rb`: Add title line to mirror functionality of slack-handler.rb (@zer0nimbus)
+- `handler-slack.rb`: Add a `link_names` parameter to allow for mentions (@unionsep)
 
-- Added title line to slack-handler-multichannel.rb to mirror functionality of slack-handler.rb
-
-
-## [1.0.2] - 2017-03-13
 ### Fixed
-- Allow custom channels with custom payload
-
-## [1.0.1] - 2016-08-08
-### Added
-- Added a link_names to allow for a mentions
+- Allow custom channels with custom payload (@bashtoni)
+- `handler-slack.rb`: Access the event notification from the correct location (@dunpealer)
 
 ## [1.0.0] - 2016-06-14
 ### Added
