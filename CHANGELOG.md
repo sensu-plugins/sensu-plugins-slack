@@ -4,7 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-### Changed
+
+## [1.1.1] - 2017-06-24
+### Fixed
 - Ran rubocop against `bin/slack-handler.rb` and `bin/slack-handler-multichannel.rb` (@pgporada)
 - Fixed occurrences of http:// needing to be https:// by default (@pgporada)
 - Fixed the location of the Sensu image that gets pulled in (@pgporada)
@@ -78,7 +80,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.0...1.1.1.
 [1.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/v0.1.2...1.0.0
 [0.1.2]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/0.1.1...v0.1.2
