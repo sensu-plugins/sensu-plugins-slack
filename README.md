@@ -12,7 +12,7 @@
  * bin/handler-slack.rb
  * bin/handler-slack-multichannel.rb
 
-## Usage
+## Usage for handler-slack.rb
 ```
 {
   "slack": {
@@ -41,6 +41,39 @@
   }
 }
 ```
+## Usage for handler-slack-multichannel.rb
+```
+{
+  "slack": {
+    "webhook_url": "webhook url",
+    "channel": {
+      "default": [ "#no-team-alerts" ],
+      "compulsory": [ "#all-alerts" ]
+    }
+    "message_prefix": "optional prefix - can be used for mentions",
+    "surround": "optional - can be used for bold(*), italics(_), code(`) and preformatted(```)",
+    "bot_name": "optional bot name, defaults to slack defined",
+    "link_names": "optional - find and link channel names and usernames",
+    "message_template": "optional description erb template file - /some/path/to/template.erb",
+    "payload_template": "optional json payload template file (note: overrides most other template options.)",
+    "template": "backwards-compatible alias for message_template",
+    "proxy_address": "The HTTP proxy address (example: proxy.example.com)",
+    "proxy_port": "The HTTP proxy port (if there is a proxy)",
+    "proxy_username": "The HTTP proxy username (if there is a proxy)",
+    "proxy_password": "The HTTP proxy user password (if there is a proxy)",
+    "icon_url": "https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png",
+    "icon_emoji": ":snowman:",
+    "custom_field": [
+      "list",
+      "of",
+      "optional",
+      "check_fields",
+      "to_render"
+    ]
+  }
+}
+```
+
 
 ## Installation
 

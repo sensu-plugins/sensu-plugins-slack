@@ -41,6 +41,27 @@
 #       ...,
 #     }
 # }
+#
+# Custom Field support added:
+#
+# Adding custom_field to handler will add a field to message with that fields content, if that field doesn't exist it will be ignored.
+#
+#       "slack" {
+#         "channels" [ "#db-team-alerts" ],
+#         "custom_field" [
+#           "field_name",
+#           "field_name_2"
+#         ]
+#        }
+#
+# On your check.json
+#
+# {
+#   "checks": {
+#     "check_disk_usage": {
+#        "command": " ~/check-disk-usage.rb -w 90 -c 95",
+#        "field_name": "https://someurl.somewhere",
+#        "field_name_2: "something_you_want_added"
 
 require 'sensu-handler'
 require 'json'
@@ -105,6 +126,10 @@ class Slack < Sensu::Handler
     return @event['check']['slack']['channels']
   rescue
     return false
+  end
+
+  def custom_field
+    get_setting('custom_field')
   end
 
   def compile_channel_list
@@ -231,12 +256,26 @@ class Slack < Sensu::Handler
   end
 
   def payload(notice, channel)
+    client_fields = []
+
+    unless custom_field.nil?
+      custom_field.each do |field|
+        is_short = true unless @event['client'].key?(field) && @event['client'][field].length > 50
+        field_title = field unless @event['check'][field].nil?
+        client_fields << {
+          title: field_title,
+          value: @event['check'][field],
+          short: is_short
+        }
+      end
+    end
     {
       icon_url: slack_icon_url ? slack_icon_url : 'https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png',
       attachments: [{
         title: "#{@event['client']['address']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
-        color: color
+        color: color,
+        fields: client_fields
       }]
     }.tap do |payload|
       payload[:channel] = channel

@@ -6,6 +6,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## [Unreleased]
 ### Added
 - ruby 2.4 testing in travis (@majormoses)
+- `slack-handler-multichannel.rb`: Add custom_field options to supply additional fields (@justbkuz)
 
 ## [1.1.1] - 2017-06-24
 ### Fixed
