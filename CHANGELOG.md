@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.2.0] - 2017-07-13
 ### Added
 - ruby 2.4 testing in travis (@majormoses)
 - `slack-handler-multichannel.rb`: Add custom_field options to supply additional fields (@justbkuz)
@@ -83,7 +85,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.1...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.2.0...HEAD
+[1.2.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.0...1.1.1.
 [1.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/v0.1.2...1.0.0
