@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Added
+- `slack-handler-multichannel.rb`: Added support for `icon_emoji` option, which documentation already suggested was supported (@fildred13)
 
 ## [1.2.0] - 2017-07-13
 ### Added
