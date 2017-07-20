@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Added
+- `slack-handler-multichannel.rb`: Added support for client-defined channel overrides (@fildred13)
 
 ## [1.3.0] - 2017-07-19
 ### Added
