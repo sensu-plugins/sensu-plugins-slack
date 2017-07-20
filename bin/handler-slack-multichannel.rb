@@ -33,7 +33,7 @@
 # in the client config or check config.
 #
 # If channels are defined on the client, they will override the defaults:
-# 
+#
 # { "client":{
 #     "name": "Appserver"
 #     "slack" {
