@@ -16,30 +16,45 @@
 #
 # Default channels and compulsory channels can be set in the handler config:
 #
-# { "handlers":
+# { "handlers": {
 #     "slack": {
 #       "channels" {
 #         "default": [ "#no-team-alerts" ],
 #         "compulsory": [ "#all-alerts" ],
 #        }
-#     }
+#     },
+#     ...,
+#   }
 # }
 #
 # Alerts are always sent to the compulsory channel(s).
 #
 # Alerts are sent to default channels if no channels are configured
-# in the check config.
+# in the client config or check config.
 #
-# Check specific channels:
+# If channels are defined on the client, they will override the defaults:
+# 
+# { "client":{
+#     "name": "Appserver"
+#     "slack" {
+#       "channels" [ "#appserver-team-alerts" ]
+#     },
+#     ...,
+#   }
+# }
 #
-# { "checks":
+# If channels are defined on a check, they will override anything defined on
+# the client or the defaults:
+#
+# { "checks": {
 #     "check_my_db": {
 #       "handlers": [ "default", "slack" ],
 #       "slack" {
 #         "channels" [ "#db-team-alerts" ]
-#       }
+#       },
 #       ...,
 #     }
+#   }
 # }
 #
 # Custom Field support added:
@@ -132,6 +147,12 @@ class Slack < Sensu::Handler
     return false
   end
 
+  def client_configured_channels
+    return @event['client']['slack']['channels']
+  rescue
+    return false
+  end
+
   def custom_field
     get_setting('custom_field')
   end
@@ -142,6 +163,9 @@ class Slack < Sensu::Handler
     if check_configured_channels
       channels = check_configured_channels
       puts "using check configured channels: #{channels.join('.').chomp(',')}"
+    elsif client_configured_channels
+      channels = client_configured_channels
+      puts "using client configured channels: #{channels.join('.').chomp(',')}"
     else
       channels = default_channels
       puts "using check default channels: #{default_channels.join(',').chomp(',')}"
