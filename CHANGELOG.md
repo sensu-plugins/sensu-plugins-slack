@@ -5,7 +5,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
-## [1.2.1] - 2017-07-19
+## [1.3.0] - 2017-07-19
 ### Added
 - `slack-handler-multichannel.rb`: Added support for `icon_emoji` option, which documentation already suggested was supported (@fildred13)
 
@@ -90,6 +90,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - initial release
 
 [Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.2.0...HEAD
+[1.3.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.0...1.1.1.
 [1.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.0.0...1.1.0
