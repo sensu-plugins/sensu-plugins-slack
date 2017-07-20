@@ -90,6 +90,10 @@ class Slack < Sensu::Handler
     get_setting('webhook_url')
   end
 
+  def slack_icon_emoji
+    get_setting('icon_emoji')
+  end
+
   def slack_proxy_addr
     get_setting('proxy_addr')
   end
@@ -280,6 +284,7 @@ class Slack < Sensu::Handler
     }.tap do |payload|
       payload[:channel] = channel
       payload[:username] = slack_bot_name if slack_bot_name
+      payload[:icon_emoji] = slack_icon_emoji if slack_icon_emoji
       payload[:attachments][0][:mrkdwn_in] = %w(text) if markdown_enabled
     end
   end
