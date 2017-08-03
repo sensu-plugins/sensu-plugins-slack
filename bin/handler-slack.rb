@@ -87,11 +87,11 @@ class Slack < Sensu::Handler
   end
 
   def incident_key
-   if dashboard_uri.nil?
+    if dashboard_uri.nil?
       @event['client']['name'] + '/' + @event['check']['name']
-   else
+    else
       dashboard_uri + @event['client']['name'] + '?check=' + @event['check']['name']
-   end
+    end
   end
 
   def get_setting(name)
