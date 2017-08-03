@@ -17,6 +17,7 @@
 {
   "slack": {
     "webhook_url": "webhook url",
+    "dashboard": "uchiwa url, add link to slack notification. Format: sensu.com/#/client/$DataCenter/, optional",
     "channel": "#notifications-room, optional defaults to slack defined",
     "message_prefix": "optional prefix - can be used for mentions",
     "surround": "optional - can be used for bold(*), italics(_), code(`) and preformatted(```)",
