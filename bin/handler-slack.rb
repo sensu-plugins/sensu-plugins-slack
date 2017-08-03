@@ -82,8 +82,16 @@ class Slack < Sensu::Handler
     get_setting('proxy_password')
   end
 
+  def dashboard_uri
+    get_setting('dashboard')
+  end
+
   def incident_key
-    @event['client']['name'] + '/' + @event['check']['name']
+   if dashboard_uri.nil?
+      @event['client']['name'] + '/' + @event['check']['name']
+   else
+      dashboard_uri + @event['client']['name'] + '?check=' + @event['check']['name']
+   end
   end
 
   def get_setting(name)
