@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
+## [1.4.0] - 2017-08-07
+### Added
+- `handler-slack.rb`: Add param dashboard to show http link on client notification
+
 ## [1.4.0] - 2017-07-24
 ### Added
 - `slack-handler-multichannel.rb`: Added support for client-defined channel overrides (@fildred13)
