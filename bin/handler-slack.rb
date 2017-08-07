@@ -90,7 +90,7 @@ class Slack < Sensu::Handler
     if dashboard_uri.nil?
       @event['client']['name'] + '/' + @event['check']['name']
     else
-      dashboard_uri + @event['client']['name'] + '?check=' + @event['check']['name']
+      "<#{dashboard_uri}#{@event['client']['name']}?check=#{@event['check']['name']}|#{@event['client']['name']}/#{@event['check']['name']}>"
     end
   end
 
