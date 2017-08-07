@@ -5,7 +5,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
-## [1.4.0] - 2017-08-07
+## [1.5.0] - 2017-08-07
 ### Added
 - `handler-slack.rb`: Add param dashboard to show http link on client notification
 
@@ -97,7 +97,9 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...HEAD
+[1.5.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.4.0...1.5.0
+[1.4.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.1...1.2.0
 [1.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.1.0...1.1.1.
