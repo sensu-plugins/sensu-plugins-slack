@@ -46,10 +46,13 @@
 ```
 {
   "slack": {
-    "webhook_url": "webhook url",
+    "webhook_urls": {
+      "no-team-alerts": "https://hooks.slack.com/services/AAAAAAA",
+      "all-alerts": "https://hooks.slack.com/services/BBBBBB"
+    },
     "channel": {
-      "default": [ "#no-team-alerts" ],
-      "compulsory": [ "#all-alerts" ]
+      "default": [ "no-team-alerts" ],
+      "compulsory": [ "all-alerts" ]
     }
     "message_prefix": "optional prefix - can be used for mentions",
     "surround": "optional - can be used for bold(*), italics(_), code(`) and preformatted(```)",

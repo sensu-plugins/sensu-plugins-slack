@@ -129,6 +129,10 @@ class Slack < Sensu::Handler
     get_setting('surround')
   end
 
+  def webhook_urls
+    get_setting('webhook_urls')
+  end
+
   def default_channels
     return get_setting('channels')['default']
   rescue
@@ -244,6 +248,7 @@ class Slack < Sensu::Handler
   end
 
   def post_data(notice, channel)
+    slack_webhook_url = webhook_urls[channel]
     uri = URI(slack_webhook_url)
 
     http = if defined?(slack_proxy_addr).nil?
