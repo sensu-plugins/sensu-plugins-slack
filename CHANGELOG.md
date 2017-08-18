@@ -6,10 +6,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## [Unreleased]
 ## [1.5.1] - 2017-08-18
 ### Fixed
-- `handler-slack-multichannel.rb`: Add param webhook_urls to support one webhook_url per channel
+- `handler-slack-multichannel.rb`: Add param webhook_urls to support one webhook_url per channel (@autumnw)
 
 ### Added
-- slack badge to README.
+- slack badge to README. (@majormoses)
 
 ## [1.5.0] - 2017-08-07
 ### Added
