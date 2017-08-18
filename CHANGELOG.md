@@ -4,9 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-## [1.5.0] - 2017-08-18
+## [1.5.1] - 2017-08-18
 ### Fixed
 - `handler-slack-multichannel.rb`: Add param webhook_urls to support one webhook_url per channel
+
+### Added
+- slack badge to README.
 
 ## [1.5.0] - 2017-08-07
 ### Added
@@ -101,6 +104,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 - initial release
 
 [Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...HEAD
+[1.5.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.2.0...1.3.0
