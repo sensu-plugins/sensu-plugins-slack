@@ -4,6 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+## [1.5.0] - 2017-08-18
+### Fixed
+- `handler-slack-multichannel.rb`: Add param webhook_urls to support one webhook_url per channel
 
 ## [1.5.0] - 2017-08-07
 ### Added
