@@ -233,7 +233,7 @@ class Slack < Sensu::Handler
                  '''<%=
                  [
                    @event["check"]["output"].gsub(\'"\', \'\\"\'),
-                   @event["client"]["address"],
+                   @event["client"]["name"],
                    @event["client"]["subscriptions"].join(",")
                  ].join(" : ")
                  %>
@@ -301,7 +301,7 @@ class Slack < Sensu::Handler
     {
       icon_url: slack_icon_url ? slack_icon_url : 'https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png',
       attachments: [{
-        title: "#{@event['client']['address']} - #{translate_status}",
+        title: "#{@event['client']['name']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
         color: color,
         fields: client_fields
