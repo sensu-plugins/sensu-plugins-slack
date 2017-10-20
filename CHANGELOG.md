@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+### Changed
+- `handler-slack-multichannel.rb`: Fixed title unknown issue, change from client address to client name
+
+## [Unreleased]
 ## [1.5.1] - 2017-08-18
 ### Fixed
 - `handler-slack-multichannel.rb`: Add param webhook_urls to support one webhook_url per channel (@autumnw)
