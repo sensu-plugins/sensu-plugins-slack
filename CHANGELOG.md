@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-### Changed
+### Breaking Changes
 - `handler-slack-multichannel.rb`: Fixed title unknown issue, change from client address to client name
 
 ## [Unreleased]
