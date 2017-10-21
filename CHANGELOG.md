@@ -4,10 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-### Breaking Changes
-- `handler-slack-multichannel.rb`: Fixed title unknown issue, change from client address to client name
 
-## [Unreleased]
+## [2.0.0] - 2017-10-21
+### Breaking Changes
+- `handler-slack-multichannel.rb`: Fixed title unknown issue when using proxy clients, change from client address to client name (@autumnw)
+
 ## [1.5.1] - 2017-08-18
 ### Fixed
 - `handler-slack-multichannel.rb`: Add param webhook_urls to support one webhook_url per channel (@autumnw)
@@ -107,7 +108,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...2.0.0
 [1.5.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.3.0...1.4.0
