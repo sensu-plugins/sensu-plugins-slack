@@ -1,0 +1,10 @@
+{
+  "slack": {
+    "webhook_url": "https://hooks.slack.com/services/XXX/XXX/XXX",
+    "dashboard": "https://my-super-awesome-dashbord.domain.tld",
+    "channel": "#bots",
+    "bot_name": "sensubot",
+    "icon_url": "https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png",
+    "icon_emoji": ":snowman:"
+  }
+}

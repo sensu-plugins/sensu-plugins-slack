@@ -96,6 +96,15 @@ class Slack < Sensu::Handler
 
   def get_setting(name)
     settings[config[:json_config]][name]
+  rescue TypeError, NoMethodError => e
+    puts "settings: #{settings}"
+    puts "slack key: #{config[:json_config]}. This should not be a file name/path."
+    puts <<-EOS
+      key name: #{name}. This is the key in config that broke.
+      Check the slack key to make sure it's parent key exists"
+      EOS
+    puts "error: #{e.message}"
+    exit 3 # unknown
   end
 
   def handle
