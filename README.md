@@ -52,7 +52,7 @@
       "no-team-alerts": "https://hooks.slack.com/services/AAAAAAA",
       "all-alerts": "https://hooks.slack.com/services/BBBBBB"
     },
-    "channel": {
+    "channels": {
       "default": [ "no-team-alerts" ],
       "compulsory": [ "all-alerts" ]
     }
