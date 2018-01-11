@@ -5,6 +5,9 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## [Unreleased]
 
+### Breaking Changes
+- bumped `sensu-plugin` dependency to 2.x which removes in handler filtering for `occurrences`. If you want to keep using the same filtering features you must specify it and ensure that you have applied the filter by setting `"filters": ["occurrences"]`. For more information see [here](https://blog.sensuapp.org/deprecating-event-filtering-in-sensu-plugin-b60c7c500be3) (@majormoses)
+
 ## [2.0.0] - 2017-10-21
 ### Breaking Changes
 - `handler-slack-multichannel.rb`: Fixed title unknown issue when using proxy clients, change from client address to client name (@autumnw)
