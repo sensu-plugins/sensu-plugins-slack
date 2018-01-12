@@ -1,12 +1,16 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
+This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
 
+## [3.0.0] - 2018-01-11
 ### Breaking Changes
 - bumped `sensu-plugin` dependency to 2.x which removes in handler filtering for `occurrences`. If you want to keep using the same filtering features you must specify it and ensure that you have applied the filter by setting `"filters": ["occurrences"]`. For more information see [here](https://blog.sensuapp.org/deprecating-event-filtering-in-sensu-plugin-b60c7c500be3) (@majormoses)
+
+### Changed
+- update changelog guidelines location, fix spelling in PR template (@majormoses)
 
 ## [2.0.0] - 2017-10-21
 ### Breaking Changes
@@ -111,7 +115,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/2.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/2.0.0...3.0.0
 [2.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...2.0.0
 [1.5.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.4.0...1.5.0
