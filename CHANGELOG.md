@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [3.0.1] - 2018-01-21
+### Changed
+- Bumped Rubocop to 0.52.1 in response to CVE-2017-8418 (@nicoleheejin)
+
 ## [3.0.0] - 2018-01-11
 ### Breaking Changes
 - bumped `sensu-plugin` dependency to 2.x which removes in handler filtering for `occurrences`. If you want to keep using the same filtering features you must specify it and ensure that you have applied the filter by setting `"filters": ["occurrences"]`. For more information see [here](https://blog.sensuapp.org/deprecating-event-filtering-in-sensu-plugin-b60c7c500be3) (@majormoses)
