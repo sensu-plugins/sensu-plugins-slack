@@ -131,25 +131,25 @@ class Slack < Sensu::Handler
 
   def default_channels
     return get_setting('channels')['default']
-  rescue
+  rescue StandardError
     return []
   end
 
   def compulsory_channels
     return get_setting('channels')['compulsory']
-  rescue
+  rescue StandardError
     return false
   end
 
   def check_configured_channels
     return @event['check']['slack']['channels']
-  rescue
+  rescue StandardError
     return false
   end
 
   def client_configured_channels
     return @event['client']['slack']['channels']
-  rescue
+  rescue StandardError
     return false
   end
 
@@ -270,7 +270,7 @@ class Slack < Sensu::Handler
       puts "response: #{response}"
 
       verify_response(response)
-    rescue => error
+    rescue StandardError => error
       puts "error making http request: #{error}"
     end
   end
@@ -310,7 +310,7 @@ class Slack < Sensu::Handler
       payload[:channel] = channel
       payload[:username] = slack_bot_name if slack_bot_name
       payload[:icon_emoji] = slack_icon_emoji if slack_icon_emoji
-      payload[:attachments][0][:mrkdwn_in] = %w(text) if markdown_enabled
+      payload[:attachments][0][:mrkdwn_in] = %w[text] if markdown_enabled
     end
   end
 
