@@ -199,9 +199,10 @@ class Slack < Sensu::Handler
       0 => '#36a64f',
       1 => '#FFCC00',
       2 => '#FF0000',
-      3 => '#6600CC'
+      3 => '#6600CC',
+      127 => '#6600CC'
     }
-    color.fetch(check_status.to_i)
+    color.fetch(check_status.to_i, '#d13650')
   end
 
   def check_status
@@ -213,7 +214,8 @@ class Slack < Sensu::Handler
       0 => :OK,
       1 => :WARNING,
       2 => :CRITICAL,
-      3 => :UNKNOWN
+      3 => :UNKNOWN,
+      127 => :UNKNOWN
     }
     status[check_status.to_i]
   end

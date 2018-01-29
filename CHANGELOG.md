@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+### Fixed
+- Fixed unknown sensu check return value 127
+
+### Changed
+- Added default color for unknown sensu check return values
 
 ## [3.0.0] - 2018-01-11
 ### Breaking Changes
