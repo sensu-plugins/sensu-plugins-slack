@@ -5,6 +5,7 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [3.1.0] - 2018-01-31
 ### Changed
 - `handler-slack.rb`: emit an `unknown` with helpful debug messages when passing in bad config (@majormoses)
 
@@ -121,7 +122,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.0...HEAD
+[3.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/2.0.0...3.0.0
 [2.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...2.0.0
 [1.5.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...1.5.1
