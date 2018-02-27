@@ -210,7 +210,21 @@ class Slack < Sensu::Handler
       2 => '#FF0000',
       3 => '#6600CC'
     }
-    color.fetch(check_status.to_i)
+    begin
+      color.fetch(check_status.to_i)
+    # a script can return any error code it feels like we should not assume
+    # that it will always be 0,1,2,3 even if that is the sensu (nagions)
+    # specification. A couple common examples:
+    # 1. A sensu server schedules a check on the instance but the command
+    # executed does not exist in your `$PATH`. Shells will return a `127` status
+    # code.
+    # 2. Similarly a `126` is a permission denied or the command is not
+    # executable.
+    # Rather than adding every possible value we should just treat any non spec
+    # designated status code as `unknown`s.
+    rescue KeyError
+      color.fetch(3)
+    end
   end
 
   def check_status
@@ -224,6 +238,11 @@ class Slack < Sensu::Handler
       2 => :CRITICAL,
       3 => :UNKNOWN
     }
-    status[check_status.to_i]
+    begin
+      status.fetch(check_status.to_i)
+    # handle any non standard check status as `unknown`
+    rescue KeyError
+      status.fetch(3)
+    end
   end
 end
