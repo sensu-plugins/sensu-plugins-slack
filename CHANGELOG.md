@@ -5,6 +5,7 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [3.1.1] - 2018-03-17
 ### Fixed
 - handler-slack.rb: rescue any non sensu specification compliant status code passed to the slack handler as the color matching unknown (@majormoses)
 
@@ -125,7 +126,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.1...HEAD
+[3.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/2.0.0...3.0.0
 [2.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/1.5.0...2.0.0
