@@ -18,7 +18,7 @@
 #
 # { "handlers": {
 #     "slack": {
-#       "channels" {
+#       "channels": {
 #         "default": [ "#no-team-alerts" ],
 #         "compulsory": [ "#all-alerts" ],
 #        }
@@ -36,8 +36,8 @@
 #
 # { "client":{
 #     "name": "Appserver"
-#     "slack" {
-#       "channels" [ "#appserver-team-alerts" ]
+#     "slack": {
+#       "channels": [ "#appserver-team-alerts" ]
 #     },
 #     ...,
 #   }
@@ -49,8 +49,8 @@
 # { "checks": {
 #     "check_my_db": {
 #       "handlers": [ "default", "slack" ],
-#       "slack" {
-#         "channels" [ "#db-team-alerts" ]
+#       "slack": {
+#         "channels": [ "#db-team-alerts" ]
 #       },
 #       ...,
 #     }
@@ -61,9 +61,9 @@
 #
 # Adding custom_field to handler will add a field to message with that fields content, if that field doesn't exist it will be ignored.
 #
-#       "slack" {
-#         "channels" [ "#db-team-alerts" ],
-#         "custom_field" [
+#       "slack": {
+#         "channels": [ "#db-team-alerts" ],
+#         "custom_field": [
 #           "field_name",
 #           "field_name_2"
 #         ]
