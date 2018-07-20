@@ -69,14 +69,6 @@
 #         ]
 #        }
 #
-# On your check.json
-#
-# {
-#   "checks": {
-#     "check_disk_usage": {
-#        "command": " ~/check-disk-usage.rb -w 90 -c 95",
-#        "field_name": "https://someurl.somewhere",
-#        "field_name_2: "something_you_want_added"
 
 require 'sensu-handler'
 require 'json'
@@ -290,10 +282,10 @@ class Slack < Sensu::Handler
     unless custom_field.nil?
       custom_field.each do |field|
         is_short = true unless @event['client'].key?(field) && @event['client'][field].length > 50
-        field_title = field unless @event['check'][field].nil?
+        field_title = field unless @event['client'][field].nil?
         client_fields << {
           title: field_title,
-          value: @event['check'][field],
+          value: @event['client'][field],
           short: is_short
         }
       end
