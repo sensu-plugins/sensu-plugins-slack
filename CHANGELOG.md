@@ -8,6 +8,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Fixed
 - handler-slack-multichannel.rb: updated the comments to be valid json as they were missing `:` for keys (@lcx)
 
+### Fixed
+- `handler-slack.rb` and `handler-slack-multichannel.rb`: Pass plain text in order to support mention notifications in Mattermost (@joostfaassen)
+
+
 ## [3.1.1] - 2018-03-17
 ### Fixed
 - handler-slack.rb: rescue any non sensu specification compliant status code passed to the slack handler as the color matching unknown (@majormoses)
