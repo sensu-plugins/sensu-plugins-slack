@@ -96,7 +96,7 @@
   "channel": channel,
   "attachments": [
     {
-      "fallback": "<%= @event["check"]["output"] %>",
+      "fallback": "<%= @event["check"]["output"].gsub('"', '\\"') %>",
       "color": "<%= color %>",
       "title": "<%= @event["check"]["name"] %> (<%= @event["client"]["name"] %>)",
       "text": "<%= @event["check"]["output"].gsub('"', '\\"') %>"
