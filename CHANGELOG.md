@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins/community/blob/master/HOW_WE_CHANGELOG.md)
 
 ## [Unreleased]
+
+## [4.0.0] - 2019-04-02
 ### Breaking Changes
 - Bump sensu-plugin version from `~> 2.0` to `~> 4.0` for Sensu 1.x to Sensu Go event conversion you can read the changelog entries for [4.0](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#400---2018-02-17) and [3.0](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#300---2018-12-04)
 - drop support and testing for ruby 2.1 and 2.2 as they are EOL
@@ -132,7 +134,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.1...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/4.0.0...HEAD
+[4.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.1...4.0.0
 [3.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.0.0...3.1.0
 [3.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/2.0.0...3.0.0
