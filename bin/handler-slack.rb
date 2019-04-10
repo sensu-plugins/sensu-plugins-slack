@@ -168,7 +168,6 @@ class Slack < Sensu::Handler
     begin # retries loop
       tries = slack_webhook_retries
       Timeout.timeout(slack_webhook_timeout) do
-
         begin # main loop for trying to deliver the message to slack webhook
           req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
 
@@ -179,7 +178,7 @@ class Slack < Sensu::Handler
             req.body = body
           end
 
-          response = http.request(req)
+          http.request(req)
 
         # replace verify_response with a rescue within the loop
         rescue Net::HTTPServerException => error
@@ -189,13 +188,11 @@ class Slack < Sensu::Handler
             retry
           else
             # raise error for sensu-server to catch and log
-            puts 'slack api failed (retries) ' + incident_key + ' : ' + error.response.code + ' ' + error.response.message + ': sending to channel "' + slack_channel + '" the message: ' + body
+            puts "slack api failed (retries) #{incident_key}: #{error.response.code} #{error.response.message}: channel '#{slack_channel}', message: #{body}"
             exit 1
           end
         end # of main loop for trying to deliver the message to slack webhook
-
       end # of timeout:do loop
-
     # if the timeout is exceeded, consider this try failed
     rescue Timeout::Error
       if (tries -= 1) > 0
@@ -203,7 +200,7 @@ class Slack < Sensu::Handler
         retry
       else
         # raise error for sensu-server to catch and log
-        puts 'slack webhook failed (timeout) ' + incident_key + ' : sending to channel "' + slack_channel + '" the message: ' + body
+        puts "slack webhook failed (timeout) #{incident_key}: channel '#{slack_channel}', message: #{body}"
         exit 1
       end
     end # of retries loop
