@@ -30,6 +30,21 @@ class Slack < Sensu::Handler
     get_setting('webhook_url')
   end
 
+  def slack_webhook_retries
+    # The number of retries to deliver the payload to the slack webhook
+    get_setting('webhook_retries') || 5
+  end
+
+  def slack_webhook_timeout
+    # The amount of time (in seconds) to give for the webhook request to complete before failing it
+    get_setting('webhook_timeout') || 10
+  end
+
+  def slack_webhook_retry_sleep
+    # The amount of time (in seconds) to wait in between webhook retries
+    get_setting('webhook_retry_sleep') || 5
+  end
+
   def slack_icon_emoji
     get_setting('icon_emoji')
   end
@@ -149,27 +164,51 @@ class Slack < Sensu::Handler
            end
     http.use_ssl = true
 
-    req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
+    # Implement a retry-timeout strategy to handle slack api issues like network. Should solve #15
+    begin # retries loop
+      tries = slack_webhook_retries
+      Timeout.timeout(slack_webhook_timeout) do
 
-    if payload_template.nil?
-      text = slack_surround ? slack_surround + body + slack_surround : body
-      req.body = payload(text).to_json
-    else
-      req.body = body
-    end
+        begin # main loop for trying to deliver the message to slack webhook
+          req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}", 'Content-Type' => 'application/json')
 
-    response = http.request(req)
-    verify_response(response)
-  end
+          if payload_template.nil?
+            text = slack_surround ? slack_surround + body + slack_surround : body
+            req.body = payload(text).to_json
+          else
+            req.body = body
+          end
 
-  def verify_response(response)
-    case response
-    when Net::HTTPSuccess
-      true
-    else
-      raise response.error!
-    end
-  end
+          response = http.request(req)
+
+        # replace verify_response with a rescue within the loop
+        rescue Net::HTTPServerException => error
+          if (tries -= 1) > 0
+            sleep slack_webhook_retry_sleep
+            puts "retrying incident #{incident_key}... #{tries} left"
+            retry
+          else
+            # raise error for sensu-server to catch and log
+            puts 'slack api failed (retries) ' + incident_key + ' : ' + error.response.code + ' ' + error.response.message + ': sending to channel "' + slack_channel + '" the message: ' + body
+            exit 1
+          end
+        end # of main loop for trying to deliver the message to slack webhook
+
+      end # of timeout:do loop
+
+    # if the timeout is exceeded, consider this try failed
+    rescue Timeout::Error
+      if (tries -= 1) > 0
+        puts "timeout hit, retrying... #{tries} left"
+        retry
+      else
+        # raise error for sensu-server to catch and log
+        puts 'slack webhook failed (timeout) ' + incident_key + ' : sending to channel "' + slack_channel + '" the message: ' + body
+        exit 1
+      end
+    end # of retries loop
+
+  end # of post_data
 
   def payload(notice)
     client_fields = []
