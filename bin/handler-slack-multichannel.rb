@@ -269,12 +269,11 @@ class Slack < Sensu::Handler
         begin
           req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
           if payload_template.nil?
-            text = slack_surround ? "#{slack_surround}#{notice}#{slack_surround} : notice
+            text = slack_surround ? "#{slack_surround}#{notice}#{slack_surround}" : notice
             req.body = payload(text, channel).to_json
           else
             req.body = notice
           end
-          puts "request: #{req}"
 
           response = http.request(req)
 
@@ -287,7 +286,7 @@ class Slack < Sensu::Handler
             retry
           else
             # raise error for sensu-server to catch and log
-            puts "slack api failed (retries) #{incident_key} : #{error.response.code} #{error.response.message}: sending to channel #{channel} the message: #{notice}"
+            puts "slack api failed (retries) #{incident_key} : #{error.response.code} #{error.response.message}: channel: '#{channel}' message: #{notice}"
             exit 1
           end
         end
@@ -298,7 +297,7 @@ class Slack < Sensu::Handler
         retry
       else
         # raise error for sensu-server to catch and log
-        puts "slack api failed (timeout) #{incident_key} : sending to channel #{channel} the message: #{notice}"
+        puts "slack api failed (timeout) #{incident_key} : channel '#{channel}' message: #{notice}"
         exit 1
       end
     end
