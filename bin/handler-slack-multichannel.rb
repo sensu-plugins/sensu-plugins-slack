@@ -269,7 +269,7 @@ class Slack < Sensu::Handler
         begin
           req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
           if payload_template.nil?
-            text = slack_surround ? slack_surround + notice + slack_surround : notice
+            text = slack_surround ? "#{slack_surround}#{notice}#{slack_surround} : notice
             req.body = payload(text, channel).to_json
           else
             req.body = notice
