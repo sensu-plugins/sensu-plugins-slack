@@ -287,7 +287,7 @@ class Slack < Sensu::Handler
             retry
           else
             # raise error for sensu-server to catch and log
-            puts 'slack api failed (retries) ' + incident_key + ' : ' + error.response.code + ' ' + error.response.message + ': sending to channel "' + channel + '" the message: ' + notice
+            puts "slack api failed (retries) #{incident_key} : #{error.response.code} #{error.response.message}: sending to channel #{channel} the message: #{notice}"
             exit 1
           end
         end
