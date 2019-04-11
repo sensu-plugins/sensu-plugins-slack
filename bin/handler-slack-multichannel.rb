@@ -298,7 +298,7 @@ class Slack < Sensu::Handler
         retry
       else
         # raise error for sensu-server to catch and log
-        puts 'slack api failed (timeout) ' + incident_key + ' : sending to channel "' + channel + '" the message: ' + notice
+        puts "slack api failed (timeout) #{incident_key} : sending to channel #{channel} the message: #{notice}"
         exit 1
       end
     end
