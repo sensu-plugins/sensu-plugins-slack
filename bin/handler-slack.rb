@@ -204,7 +204,6 @@ class Slack < Sensu::Handler
         exit 1
       end
     end # of retries loop
-
   end # of post_data
 
   def payload(notice)
