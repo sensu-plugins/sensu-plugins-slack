@@ -333,6 +333,11 @@ class Slack < Sensu::Handler
     end
   end
 
+  def out_of_bounds_status_code
+    # set default status code to treat checks' exit status when not in the [0..3] range
+    get_setting('out_of_bounds_status_code') || 3
+  end
+
   def color
     color = {
       0 => '#36a64f',
@@ -340,8 +345,11 @@ class Slack < Sensu::Handler
       2 => '#FF0000',
       3 => '#6600CC'
     }
-    # When the sensu check status is out of bounds, use color for UNK
-    color.fetch(check_status.to_i, '#6600CC')
+    begin
+      color.fetch(check_status.to_i)
+    rescue KeyError
+      color.fetch(out_of_bounds_status_code.to_i)
+    end
   end
 
   def check_status
@@ -355,7 +363,10 @@ class Slack < Sensu::Handler
       2 => :CRITICAL,
       3 => :UNKNOWN
     }
-    # When the sensu check status is out of bounds, don't hide the status but show it for detailed info
-    status.fetch(check_status.to_i, "OUT OF BOUNDS: #{check_status.to_i}")
+    begin
+      status.fetch(check_status.to_i)
+    rescue KeyError
+      status.fetch(out_of_bounds_status_code.to_i)
+    end
   end
 end
