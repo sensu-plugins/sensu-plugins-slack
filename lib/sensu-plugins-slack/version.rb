@@ -1,7 +1,7 @@
 module SensuPluginsSlack
   module Version
     MAJOR = 4
-    MINOR = 0
+    MINOR = 1
     PATCH = 0
 
     VER_STRING = [MAJOR, MINOR, PATCH].compact.join('.')

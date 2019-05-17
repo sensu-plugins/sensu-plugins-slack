@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [4.1.0]- 2019-05-16
+### Added
+- `handler-slack`: added `webhook_retries` (default: 5), `webhook_timeout` (default: 10), and `webhook_retry_sleep` configuration properties to harden against failures due to networking, rate limits, etc. (@kali-brandwatch)
+
 ## [4.0.0] - 2019-04-02
 ### Breaking Changes
 - Bump sensu-plugin version from `~> 2.0` to `~> 4.0` for Sensu 1.x to Sensu Go event conversion you can read the changelog entries for [4.0](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#400---2018-02-17) and [3.0](https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#300---2018-12-04)
@@ -134,7 +138,8 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/4.1.0...HEAD
+[4.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/4.0.0..4.1.0
 [4.0.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.1...4.0.0
 [3.1.1]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.1.0...3.1.1
 [3.1.0]: https://github.com/sensu-plugins/sensu-plugins-slack/compare/3.0.0...3.1.0
