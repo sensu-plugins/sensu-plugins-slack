@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed [here](https://github.com/sensu-plugins
 
 ## [Unreleased]
 
+## [4.2.0]- 2019-10-08
+### Added
+- `handler-slack-multichannel.rb`: Added a conditional that enables sending to a default webhook if the provided channels do not have their own dedicated webhook. 
+
 ## [4.1.0]- 2019-05-16
 ### Added
 - `handler-slack`: added `webhook_retries` (default: 5), `webhook_timeout` (default: 10), and `webhook_retry_sleep` configuration properties to harden against failures due to networking, rate limits, etc. (@kali-brandwatch)
