@@ -49,8 +49,9 @@
 {
   "slack": {
     "webhook_urls": {
-      "no-team-alerts": "https://hooks.slack.com/services/AAAAAAA",
-      "all-alerts": "https://hooks.slack.com/services/BBBBBB"
+      "default": "https://hooks.slack.com/services/AAAAAAA"
+      "no-team-alerts": "https://hooks.slack.com/services/BBBBBB",
+      "all-alerts": "https://hooks.slack.com/services/CCCCCC"
     },
     "channels": {
       "default": [ "no-team-alerts" ],
