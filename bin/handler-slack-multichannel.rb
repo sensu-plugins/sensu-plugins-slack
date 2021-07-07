@@ -129,6 +129,10 @@ class Slack < Sensu::Handler
     get_setting('webhook_urls')
   end
 
+  def webhook_url
+    get_setting('webhook_url')
+  end
+
   def default_channels
     return get_setting('channels')['default']
   rescue
@@ -160,19 +164,22 @@ class Slack < Sensu::Handler
   def compile_channel_list
     channels = []
 
+    # Some slack channels come defined as strings (when used as a single channel handler), but we need them as arrays
+    # Force channels as arrays enclosing them in []'s and using flatten to deal with properly defined arrays
+    # This way we ensure we always return an array as the rest of the code expects
     if check_configured_channels
-      channels = check_configured_channels
+      channels = [check_configured_channels].flatten
       puts "using check configured channels: #{channels.join('.').chomp(',')}"
     elsif client_configured_channels
-      channels = client_configured_channels
+      channels = [client_configured_channels].flatten
       puts "using client configured channels: #{channels.join('.').chomp(',')}"
     else
-      channels = default_channels
+      channels = [default_channels].flatten
       puts "using check default channels: #{default_channels.join(',').chomp(',')}"
     end
 
     if compulsory_channels
-      channels |= compulsory_channels
+      channels |= [compulsory_channels].flatten
       puts "adding compulsory channels: #{compulsory_channels.join(',').chomp(',')}"
     end
 
@@ -244,7 +251,7 @@ class Slack < Sensu::Handler
   end
 
   def post_data(notice, channel)
-    slack_webhook_url = webhook_urls[channel]
+    slack_webhook_url = webhook_url
     uri = URI(slack_webhook_url)
 
     http = if defined?(slack_proxy_addr).nil?
@@ -256,31 +263,43 @@ class Slack < Sensu::Handler
     http.use_ssl = true
 
     begin
-      req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
-      if payload_template.nil?
-        text = slack_surround ? slack_surround + notice + slack_surround : notice
-        req.body = payload(text, channel).to_json
-      else
-        req.body = notice
+      # Implement a retry strategy, with 5 tries max and a timeout of 10 seconds each
+      tries ||= 5
+      Timeout.timeout(10) do
+        begin
+          req = Net::HTTP::Post.new("#{uri.path}?#{uri.query}")
+          if payload_template.nil?
+            text = slack_surround ? "#{slack_surround}#{notice}#{slack_surround}" : notice
+            req.body = payload(text, channel).to_json
+          else
+            req.body = notice
+          end
+
+          response = http.request(req)
+
+          puts "response: #{response}"
+
+        rescue Net::HTTPServerException => error
+          if (tries -= 1) > 0
+            sleep 5
+            puts "retrying incident #{incident_key}... #{tries} left"
+            retry
+          else
+            # raise error for sensu-server to catch and log
+            puts "slack api failed (retries) #{incident_key} : #{error.response.code} #{error.response.message}: channel: '#{channel}' message: #{notice}"
+            exit 1
+          end
+        end
       end
-      puts "request: #{req}"
-
-      response = http.request(req)
-
-      puts "response: #{response}"
-
-      verify_response(response)
-    rescue => error
-      puts "error making http request: #{error}"
-    end
-  end
-
-  def verify_response(response)
-    case response
-    when Net::HTTPSuccess
-      true
-    else
-      raise response.error!
+    rescue Timeout::Error
+      if (tries -= 1) > 0
+        puts "retrying... #{tries} left"
+        retry
+      else
+        # raise error for sensu-server to catch and log
+        puts "slack api failed (timeout) #{incident_key} : channel '#{channel}' message: #{notice}"
+        exit 1
+      end
     end
   end
 
@@ -301,7 +320,7 @@ class Slack < Sensu::Handler
     {
       icon_url: slack_icon_url ? slack_icon_url : 'https://raw.githubusercontent.com/sensu/sensu-logo/master/sensu1_flat%20white%20bg_png.png',
       attachments: [{
-        title: "#{@event['client']['name']} - #{translate_status}",
+        title: "#{@event['client']['name']}/#{@event['check']['name']} - #{translate_status}",
         text: [slack_message_prefix, notice].compact.join(' '),
         color: color,
         fields: client_fields
@@ -314,6 +333,11 @@ class Slack < Sensu::Handler
     end
   end
 
+  def out_of_bounds_status_code
+    # set default status code to treat checks' exit status when not in the [0..3] range
+    get_setting('out_of_bounds_status_code') || 3
+  end
+
   def color
     color = {
       0 => '#36a64f',
@@ -321,7 +345,11 @@ class Slack < Sensu::Handler
       2 => '#FF0000',
       3 => '#6600CC'
     }
-    color.fetch(check_status.to_i)
+    begin
+      color.fetch(check_status.to_i)
+    rescue KeyError
+      color.fetch(out_of_bounds_status_code.to_i)
+    end
   end
 
   def check_status
@@ -335,6 +363,10 @@ class Slack < Sensu::Handler
       2 => :CRITICAL,
       3 => :UNKNOWN
     }
-    status[check_status.to_i]
+    begin
+      status.fetch(check_status.to_i)
+    rescue KeyError
+      status.fetch(out_of_bounds_status_code.to_i)
+    end
   end
 end
