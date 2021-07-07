@@ -244,7 +244,12 @@ class Slack < Sensu::Handler
   end
 
   def post_data(notice, channel)
-    slack_webhook_url = webhook_urls[channel]
+    slack_webhook_url = if webhook_urls[channel].nil?
+                          webhook_urls['default']
+                        else
+                          webhook_urls[channel]
+                        end
+
     uri = URI(slack_webhook_url)
 
     http = if defined?(slack_proxy_addr).nil?
